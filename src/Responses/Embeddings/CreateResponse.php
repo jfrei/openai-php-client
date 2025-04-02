@@ -46,9 +46,9 @@ final class CreateResponse implements ResponseContract, ResponseHasMetaInformati
         ), $attributes['data']);
 
         return new self(
-            $attributes['object'],
+            $attributes['object'] ?? 'embedding',
             $embeddings,
-            CreateResponseUsage::from($attributes['usage']),
+            CreateResponseUsage::from($attributes['usage'] ?? ['prompt_tokens' => 0, 'total_tokens' => 0]),
             $meta,
         );
     }
