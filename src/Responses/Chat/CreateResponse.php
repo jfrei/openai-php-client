@@ -47,16 +47,16 @@ final class CreateResponse implements ResponseContract, ResponseHasMetaInformati
     {
         $choices = array_map(fn (array $result): CreateResponseChoice => CreateResponseChoice::from(
             $result
-        ), $attributes['choices']);
+        ), $attributes['choices'] ?? []);
 
         return new self(
             $attributes['id'] ?? null,
-            $attributes['object'],
-            $attributes['created'],
-            $attributes['model'],
+            $attributes['object'] ?? '',
+            $attributes['created'] ?? 0,
+            $attributes['model'] ?? '',
             $attributes['system_fingerprint'] ?? null,
             $choices,
-            CreateResponseUsage::from($attributes['usage']),
+            CreateResponseUsage::from($attributes['usage'] ?? []),
             $meta,
         );
     }
